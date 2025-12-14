@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
     let messageBody = ``;
     const NL = `\n`;
 
-    let { name, phone, acceptWhatsappMessage, termsAccepted, message, subject } = body;
+    let { name, phone, acceptWhatsappMessage, termsAccepted, message, subject } = body || {};
 
     name = (name || '')?.trim();
     phone = (phone || '')?.replaceAll(/\D+/g, '');
@@ -56,7 +56,7 @@ export default defineEventHandler(async (event) => {
 
     if (!name || !phone) {
         // throw createError({
-        event.node.res.statusCode = 422;
+        // event.node.res.statusCode = 422;
 
         return {
             success: false,
