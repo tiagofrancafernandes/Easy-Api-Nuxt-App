@@ -21,10 +21,12 @@ export default defineEventHandler(async (event) => {
     let acceptMessages = toBool(waTicket?.acceptMessages ?? false);
 
     if (!acceptMessages) {
-        throw createError({
+        // throw createError({
+        return {
+            success: false,
             statusCode: 400,
             statusMessage: `Disabled to new messages!`,
-        });
+        };
     }
 
     let apiToken = (waTicket?.apiToken || '')?.trim();
@@ -32,10 +34,12 @@ export default defineEventHandler(async (event) => {
     let targetNumber = (waTicket?.targetNumber || '')?.replaceAll(/\D+/g, '');
 
     if (!apiToken || !waTicketApiUrl || !targetNumber) {
-        throw createError({
+        // throw createError({
+        return {
+            success: false,
             statusCode: 400,
             statusMessage: `Error on server [CRD]`,
-        });
+        };
     }
 
     let messageBody = ``;
@@ -51,10 +55,12 @@ export default defineEventHandler(async (event) => {
     subject = subject || '';
 
     if (!name || !phone) {
-        throw createError({
+        // throw createError({
+        return {
+            success: false,
             statusCode: 422,
             statusMessage: `Name and phone is required!`,
-        });
+        };
     }
 
     messageBody = [
@@ -70,7 +76,8 @@ export default defineEventHandler(async (event) => {
 
     let payload = { number: targetNumber, body: messageBody };
 
-    let debugPayload = debugOn ? {
+    let debugPayload = debugOn
+        ? {
               name,
               phone,
               acceptWhatsappMessage,
@@ -83,7 +90,8 @@ export default defineEventHandler(async (event) => {
                   ...waTicket,
                   apiToken: (waTicket?.apiToken).slice(0, 2) + '*****' + (waTicket?.apiToken).slice(-2),
               },
-          } : undefined;
+          }
+        : undefined;
 
     try {
         const request = await fetch(waTicketApiUrl, {
