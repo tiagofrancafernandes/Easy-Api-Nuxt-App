@@ -70,8 +70,7 @@ export default defineEventHandler(async (event) => {
 
     let payload = { number: targetNumber, body: messageBody };
 
-    let debugPayload = debugOn
-        ? {
+    let debugPayload = debugOn ? {
               name,
               phone,
               acceptWhatsappMessage,
@@ -80,9 +79,11 @@ export default defineEventHandler(async (event) => {
               subject,
               payload,
               body,
-              waTicket,
-          }
-        : undefined;
+              waTicket: {
+                  ...waTicket,
+                  apiToken: (waTicket?.apiToken).slice(0, 2) + '*****' + (waTicket?.apiToken).slice(-2),
+              },
+          } : undefined;
 
     try {
         const request = await fetch(waTicketApiUrl, {
