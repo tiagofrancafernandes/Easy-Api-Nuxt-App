@@ -56,10 +56,12 @@ export default defineEventHandler(async (event) => {
 
     if (!name || !phone) {
         // throw createError({
+        event.node.res.statusCode = 422;
+
         return {
             success: false,
             statusCode: 422,
-            statusMessage: `Name and phone is required!`,
+            statusMessage: `Name and phone is required! [${name}, ${phone}]`,
         };
     }
 
