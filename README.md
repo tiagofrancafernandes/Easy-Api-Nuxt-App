@@ -54,3 +54,8 @@ Content-Type: application/json
     "subject": "subject"
 }
 ```
+
+## Deploy on Cloud
+
+### Deploy on [Vercel](https://vercel.com):
+<a href="https://vercel.com/new/clone?repository-url=https://github.com/tiagofrancafernandes/Easy-Api-Nuxt-App/tree/master"><img src="https://vercel.com/button"></a>
