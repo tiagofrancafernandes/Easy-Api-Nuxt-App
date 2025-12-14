@@ -66,10 +66,10 @@ export default defineEventHandler(async (event) => {
     messageBody = [
         `*Nome:* ${name}`,
         `*Telefone:* ${phone}`,
-        `*Aceita receber WA?:*` + (acceptWhatsappMessage ? 'sim' : 'não'),
-        `*Aceitou os termos?:*` + (termsAccepted ? 'sim' : 'não'),
+        `*Aceita receber WA?:* ` + (acceptWhatsappMessage ? 'sim' : 'não'),
+        `*Aceitou os termos?:* ` + (termsAccepted ? 'sim' : 'não'),
         `*Assunto:* ${subject}`,
-        `*Mensagem:*${NL} ${message}`,
+        `*Mensagem:* ${NL} ${message}${NL}`,
     ]
         .filter((i: any) => Boolean)
         .join(NL);
